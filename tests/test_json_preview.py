@@ -18,13 +18,16 @@ def client(tmp_path_factory):
 
 
 @pytest.mark.asyncio
-async def test_default_list(client):
-    url = "/test/records.json-preview"
+async def test_default_dict(client):
+    next_url = "/test/records.json-preview"
     collected = []
-    while url:
-        response = await client.get(url)
-        url = response.links.get("next", {}).get("url")
-        collected.extend(response.json())
+    while next_url:
+        response = await client.get(next_url)
+        next_url_from_header = response.links.get("next", {}).get("url")
+        next_url = response.json()["next_url"]
+        assert next_url_from_header == next_url
+        collected.extend(response.json()["rows"])
+        assert response.json()["total"] == 1001
     assert len(collected) == 1001
     # They should all be unique:
     assert len(set(d["id"] for d in collected)) == 1001

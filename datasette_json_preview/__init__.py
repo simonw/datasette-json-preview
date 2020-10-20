@@ -15,4 +15,11 @@ def json_preview(data, columns, rows):
     headers = {}
     if next_url:
         headers["link"] = '<{}>; rel="next"'.format(next_url)
-    return Response.json([dict(zip(columns, row)) for row in rows], headers=headers)
+    return Response.json(
+        {
+            "rows": [dict(zip(columns, row)) for row in rows],
+            "total": data["filtered_table_rows_count"],
+            "next_url": next_url,
+        },
+        headers=headers,
+    )
