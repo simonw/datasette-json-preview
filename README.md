@@ -19,6 +19,14 @@ Install this plugin in the same environment as Datasette.
 
 Use the `.json-preview` extension to preview the new JSON API design.
 
+## Demos
+
+- https://latest-with-plugins.datasette.io/github/commits.json-preview
+- https://latest-with-plugins.datasette.io/github/commits.json-preview?_extra=next_url
+- https://latest-with-plugins.datasette.io/github/commits.json-preview?_extra=total
+- https://latest-with-plugins.datasette.io/github/commits.json-preview?_extra=next_url&_extra=total
+- https://latest-with-plugins.datasette.io/github/commits.json-preview?_extra=total&_size=0
+
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
