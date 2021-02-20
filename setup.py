@@ -28,7 +28,7 @@ setup(
     version=VERSION,
     packages=["datasette_json_preview"],
     entry_points={"datasette": ["json_preview = datasette_json_preview"]},
-    install_requires=["datasette"],
+    install_requires=["datasette>=0.55"],
     extras_require={"test": ["pytest", "pytest-asyncio", "httpx", "sqlite-utils"]},
     tests_require=["datasette-json-preview[test]"],
 )
