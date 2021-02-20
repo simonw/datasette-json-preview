@@ -22,11 +22,8 @@ async def test_default_dict(client):
     collected = []
     while next_url:
         response = await client.get(next_url.replace("http://localhost", ""))
-        next_url_from_header = response.links.get("next", {}).get("url")
-        next_url = response.json()["next_url"]
-        assert next_url_from_header == next_url
-        collected.extend(response.json()["rows"])
-        assert response.json()["total"] == 1001
+        next_url = response.links.get("next", {}).get("url")
+        collected.extend(response.json())
     assert len(collected) == 1001
     # They should all be unique:
     assert len(set(d["id"] for d in collected)) == 1001
