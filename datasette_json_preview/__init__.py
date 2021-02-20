@@ -23,11 +23,17 @@ def json_preview(data, columns, rows, request):
     if not extras:
         return Response.json(list(rows_gen), headers=headers)
 
+    to_return = {
+        "rows": list(rows_gen),
+    }
+
+    if "total" in extras:
+        to_return["total"] = data["filtered_table_rows_count"]
+
+    if "next_url" in extras:
+        to_return["next_url"] = next_url
+
     return Response.json(
-        {
-            "rows": list(rows_gen),
-            "total": data["filtered_table_rows_count"],
-            "next_url": next_url,
-        },
+        to_return,
         headers=headers,
     )
